@@ -10,8 +10,10 @@ const sid = "bbc_world_service";
 
 function Schedule(props) {
   useEffect(() => {
+    const zone = props.zone.zoneName;
+    console.log(zone);
     const d = moment.tz(props.date, "UTC").format("YYYY-MM-DD");
-    let l = moment.tz(props.date, props.zone).format("YYYY-MM-DD");
+    let l = moment.tz(props.date, zone).format("YYYY-MM-DD");
     async function fetchData() {
       let sched = [];
       let schedule = [];
@@ -46,10 +48,10 @@ function Schedule(props) {
       else {
         title += row["p:episode"]["p:title"]["_text"];
       }
-      const ld = moment.tz(start, props.zone).format("YYYY-MM-DD");
+      const ld = moment.tz(start, zone).format("YYYY-MM-DD");
       if(ld === l) {
         schedule.push({
-          local: moment.tz(start, props.zone).format("HH:mm"),
+          local: moment.tz(start, zone).format("HH:mm"),
           utc: moment.tz(start, 'UTC').format("HH:mm"),
           title: title,
           synopsis: row["p:brand"]["p:synopses"]["p:synopsis"][0]["_text"],

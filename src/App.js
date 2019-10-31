@@ -3,21 +3,23 @@ import './App.css';
 import Schedule from './Schedule/Schedule';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
-import TimezonePicker from 'react-timezone';
+//import TimezonePicker from 'react-timezone';
+import {TimezoneAutocomplete} from '@cashstar/react-timezone';
 import moment from 'moment-timezone';
 
 function App() {
   const [selectedDate, handleDateChange] = useState(moment.tz('2018-10-28', 'UTC'));
-  const [selectedTimezone, handleTimezoneChange] = useState('Europe/London');
+  const [selectedTimezone, handleTimezoneChange] = useState({zoneName:'Europe/London'});
 
   return (
     <div className="App">
     <MuiPickersUtilsProvider utils={MomentUtils}>
-      <TimezonePicker
-      value={selectedTimezone}
-      onChange={handleTimezoneChange}
-      inputProps={{ placeholder: 'Select Timezone...', name: 'timezone' }}
-      />
+    <div>
+    <label>
+        Closest City or Timezone
+    </label>
+    <TimezoneAutocomplete onTimezoneChange={handleTimezoneChange} />
+    </div>      
       <DatePicker value={selectedDate} onChange={handleDateChange} />
       <Schedule
         date={selectedDate}

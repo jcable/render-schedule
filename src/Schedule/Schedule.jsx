@@ -22,10 +22,10 @@ options.searchText = false;
 options.itemsPerPage = 100;
 
 function template(props, data) {
-  const d = moment.tz(props.date, props.zone).format("Do MMM, YYYY");
+  const d = moment.tz(props.date, props.zone.zoneName).format("Do MMM, YYYY");
   return (
     <div className="schedule">
-      <h1>Schedule for {d} in {props.zone}</h1>
+      <h1>Schedule for {d} in {props.zone.zoneName}</h1>
       <DataGrid
         columns={columns}
         dataSource={data}
